@@ -1,0 +1,51 @@
+<div class="card">
+  <img class="card-img-top" src="https://fakeimg.pl/600x400/007bff/fff?text=productDetail">
+  <div class="card-body">
+    <h5 class="card-title">{{product?.price}}元</h5>
+    <h5 class="card-title">{{product?.title}}</h5>
+    <p class="card-text">{{product?.desc}}</p>
+    <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
+
+  </div>
+<!--  <div class="card-footer text-muted">
+    <app-stars [rating]="product?.rating"></app-stars>
+  </div>-->
+</div>
+<div class="card">
+  <div class="card-body">
+    <p class="card-title">{{comments?.length}}</p>
+  </div>
+  <div class="card-footer text-muted">
+    <app-stars [rating]="product?.rating"></app-stars>
+  </div>
+</div>
+<div>
+  <button class="btn btn-info btn-lg" [class.active]="isWatched" (click)="watchProduct()">
+    {{isWatched ? '取消关注' : '关注'}}
+  </button>
+  <label>最新出价{{currentBid | number: '.2-2'}}元</label>
+</div>
+<div class="well">
+  <div>
+    <button class="btn btn-primary" (click)="isCommentHidden = !isCommentHidden">发表评论</button>
+  </div>
+  <div [hidden]="isCommentHidden">
+    <div>
+      <app-stars [(rating)]="newRating" [readOnly]="false"></app-stars>
+    </div>
+    <div>
+      <textarea [(ngModel)]="newComment"></textarea>
+    </div>
+    <button class="btn btn-info" (click)="addComment()">提交</button>
+  </div>
+  <div class="row" *ngFor="let comment of comments">
+    <hr>
+    <div class="col-md-12">
+      <app-stars [rating]="comment.rating"></app-stars>
+      <span>{{comment.user}}</span>
+      <span>{{comment.timestamp}}</span>
+      <p>{{comment.content}}</p>
+    </div>
+  </div>
+</div>
+
